@@ -20,17 +20,19 @@ import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 
 // core components
-import Admin from "layouts/Admin.js";
+// import Admin from "layouts/Admin.js";
 
 
 import "assets/css/material-dashboard-react.css?v=1.10.0";
+import Dashboard from "views/Dashboard/Dashboard";
 
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
-      <Route path="/admin" component={Admin} />
+    
+      <Route path="/" component={Dashboard} />
      
-      <Redirect from="/" to="/admin/dashboard" />
+      <Redirect from="/zax" to="/admin/dashboard" />
     </Switch>
   </BrowserRouter>,
   document.getElementById("root")
