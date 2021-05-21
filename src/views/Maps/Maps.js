@@ -1,4 +1,4 @@
-import { Description } from "@material-ui/icons";
+
 import React, { useState } from "react";
 
 import "./Mps.css"
@@ -24,7 +24,7 @@ export default function UserProfile() {
   const handleSubmit = async e => {
     e.preventDefault();
    
-      const token = await loginUser({
+      loginUser({
         topic,
         description
       });
@@ -34,21 +34,21 @@ export default function UserProfile() {
  
   return (
     
-    <div class="wrapper fadeInDown">
+    <div className="wrapper fadeInDown">
   <div id="formContent">
   
-    <h3 class="active"> Post Navigation Details </h3>
+    <h3 className="active"> Post Navigation Details </h3>
    
  
     <form onSubmit={handleSubmit}>
-      <input type="text" id="login" class="fadeIn second" name="login" value={topic} onChange={e=>setTopic(e.target.value)} placeholder="Topic"></input>
-      <input type="text" id="password" class="fadeIn third" name="login" value={description} onChange={e=>setDetail(e.target.value)} placeholder="Description"></input>
-      <input type="submit" class="fadeIn fourth" value="Submit"></input>
+      <input type="text" id="login" className="fadeIn second" name="login" value={topic} onChange={e=>setTopic(e.target.value)} placeholder="Topic"></input>
+      <input type="text" id="password" className="fadeIn third" name="login" value={description} onChange={e=>setDetail(e.target.value)} placeholder="Description"></input>
+      <input type="submit" className="fadeIn fourth" value="Submit"></input>
     </form>
 
   
     <div id="formFooter">
-      <a class="underlineHover" href="#">KONNEX</a>
+      <a className="underlineHover" href="#">KONNEX</a>
     </div>
 
   </div>

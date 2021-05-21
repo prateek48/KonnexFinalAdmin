@@ -1,14 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // core components
-import Quote from "components/Typography/Quote.js";
-import Muted from "components/Typography/Muted.js";
-import Primary from "components/Typography/Primary.js";
-import Info from "components/Typography/Info.js";
-import Success from "components/Typography/Success.js";
-import Warning from "components/Typography/Warning.js";
-import Danger from "components/Typography/Danger.js";
+
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
@@ -53,31 +47,56 @@ const styles = {
 const useStyles = makeStyles(styles);
 
 export default function TypographyPage() {
+  const[suggestion,setSuggestion]=useState("");
+  useEffect(()=>
+  {
+    
+
+     
+      fetch('https://nodejs-bug-and-announcement.herokuapp.com/announcements/allAnnouncements', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+          
+        },
+        body: JSON.stringify()
+      })
+        .then(data => data.json())
+        .then(user1=>setSuggestion(user1)).then(   console.log(suggestion.data));
+  
+
+    
+      
+  },[]);
   const classes = useStyles();
   return (
     <Card>
       <CardHeader color="primary">
-        <h4 className={classes.cardTitleWhite}>Announcements</h4>
+        <h4 className={classes.cardTitleWhite}>All Announcements</h4>
         <p className={classes.cardCategoryWhite}>
         
         </p>
       </CardHeader>
       <CardBody>
+      {
+        suggestion?suggestion.map((x,index)=>(
+        
+          <div className={classes.typo} key={index}>
+          <div className={classes.note}>{x.Subject}</div>
+          <h3>{x.Description}</h3>
+        </div>
+
+        )):
+          <div className={classes.typo}>
+          <div className={classes.note}>Loading......</div>
+          <h3></h3>
+        </div>
+
+      }
         
        
-        <div className={classes.typo}>
-          <div className={classes.note}>Announcement 1</div>
-          <h3>Last Date to submit your project is 22nd May</h3>
-        </div>
-        <div className={classes.typo}>
-          <div className={classes.note}>Announcement 2</div>
-          <h3>There would be no office till covid stay's </h3>
-        </div>
-        <div className={classes.typo}>
-          <div className={classes.note}>Announcement 3</div>
-          <h3>Our Company will soon launch ipo</h3>
-        </div>
-        
+       
+       
 
       
       </CardBody>

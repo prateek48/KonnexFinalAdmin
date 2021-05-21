@@ -2,13 +2,7 @@ import React, { useEffect, useState } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // core components
-import Quote from "components/Typography/Quote.js";
-import Muted from "components/Typography/Muted.js";
-import Primary from "components/Typography/Primary.js";
-import Info from "components/Typography/Info.js";
-import Success from "components/Typography/Success.js";
-import Warning from "components/Typography/Warning.js";
-import Danger from "components/Typography/Danger.js";
+
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
@@ -59,7 +53,7 @@ export default function TypographyPage() {
     
 
      
-      const logedInUser=fetch('https://application-imp.herokuapp.com/improvement', {
+      fetch('https://application-imp.herokuapp.com/improvement', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
@@ -85,9 +79,9 @@ export default function TypographyPage() {
       </CardHeader>
       <CardBody>
       {
-        suggestion.data&&suggestion?suggestion.data.map(x=>(
+        suggestion.data&&suggestion?suggestion.data.map((x,index)=>(
         
-          <div className={classes.typo}>
+          <div className={classes.typo} key={index}>
           <div className={classes.note}>{x.topic}</div>
           <h3>{x.detail}</h3>
         </div>

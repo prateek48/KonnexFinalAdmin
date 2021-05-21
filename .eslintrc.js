@@ -1,5 +1,13 @@
 module.exports = {
+  
   parser: "babel-eslint",
+  root: true,
+  extends: '@react-native-community',
+  rules: {
+    "react/jsx-uses-vars": "error",
+    "react/jsx-uses-react": "error",
+    'prettier/prettier': 0,
+  },
   env: {
     es6: true,
     node: true,
@@ -16,6 +24,6 @@ module.exports = {
   extends: [
     "eslint:recommended",
     "plugin:react/recommended",
-    "plugin:prettier/recommended",
+   
   ],
 };

@@ -1,104 +1,62 @@
-import React from "react";
-// @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
-import InputLabel from "@material-ui/core/InputLabel";
-// core components
-import GridItem from "components/Grid/GridItem.js";
-import GridContainer from "components/Grid/GridContainer.js";
-import CustomInput from "components/CustomInput/CustomInput.js";
-import Button from "components/CustomButtons/Button.js";
-import Card from "components/Card/Card.js";
-import CardHeader from "components/Card/CardHeader.js";
-import CardAvatar from "components/Card/CardAvatar.js";
-import CardBody from "components/Card/CardBody.js";
-import CardFooter from "components/Card/CardFooter.js";
+import React, { useState } from "react";
 
-import avatar from "assets/img/faces/marc.jpg";
+import "./Mps.css"
 
-const styles = {
-  cardCategoryWhite: {
-    color: "rgba(255,255,255,.62)",
-    margin: "0",
-    fontSize: "14px",
-    marginTop: "0",
-    marginBottom: "0",
-  },
-  cardTitleWhite: {
-    color: "#FFFFFF",
-    marginTop: "0px",
-    minHeight: "auto",
-    fontWeight: "300",
-    fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
-    marginBottom: "3px",
-    textDecoration: "none",
-  },
-};
 
-const useStyles = makeStyles(styles);
+
+async function loginUser(credentials) {
+  return fetch('https://nodejs-bug-and-announcement.herokuapp.com/announcements/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(credentials)
+  })
+    .then(data => data.json())
+ }
+
 
 export default function UserProfile() {
-  const classes = useStyles();
+  const[topic,setTopic]=useState("");
+  const[description,setDetail]=useState("");
+
+  const handleSubmit = async e => {
+    e.preventDefault();
+   
+      loginUser({
+        Subject:topic,
+        Description:description
+      });
+
+    }
+     
+ 
   return (
-    <div>
-      <GridContainer>
-        <GridItem xs={12} sm={12} md={8}>
-          <Card>
-            <CardHeader color="primary">
-              <h4 className={classes.cardTitleWhite}>Post Announcement here!</h4>
-              <p className={classes.cardCategoryWhite}>KONNEX Announcements</p>
-            </CardHeader>
-            <CardBody>
-              <GridContainer>
-                
-                
-                <GridItem xs={12} sm={12} md={4}>
-                <CustomInput
-                    labelText="Title"
-                    id="about-me"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      multiline: true,
-                      rows: 1,
-                    }}
-                  />
-                </GridItem>
-              </GridContainer>
-              <GridContainer>
-              
-               
-              </GridContainer>
-              <GridContainer>
-                
-                  
-                
-             
-              </GridContainer>
-              <GridContainer>
-                <GridItem xs={12} sm={12} md={12}>
-                 
-                  <CustomInput
-                    labelText="Announcement Description"
-                    id="about-me"
-                    formControlProps={{
-                      fullWidth: true,
-                    }}
-                    inputProps={{
-                      multiline: true,
-                      rows: 5,
-                    }}
-                  />
-                </GridItem>
-              </GridContainer>
-            </CardBody>
-            <CardFooter>
-              <Button color="primary">Post Announcement</Button>
-            </CardFooter>
-          </Card>
-        </GridItem>
-        
-      </GridContainer>
+    
+    <div className="wrapper fadeInDown">
+  <div id="formContent">
+  
+    <h3 className="active"> Post Announcement </h3>
+   
+ 
+    <form onSubmit={handleSubmit}>
+      <input type="text" id="login" className="fadeIn second" name="login" value={topic} onChange={e=>setTopic(e.target.value)} placeholder="Title"></input>
+      <input type="text" id="password" className="fadeIn third" name="login" value={description} onChange={e=>setDetail(e.target.value)} placeholder="Description"></input>
+      <input type="submit" className="fadeIn fourth" value="Submit"></input>
+    </form>
+
+  
+    <div id="formFooter">
+      <a className="underlineHover" href="#">KONNEX</a>
     </div>
+
+  </div>
+</div>
+
+
+
+
+
+    
   );
 }
